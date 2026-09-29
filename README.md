@@ -16,9 +16,9 @@ good test case for a basic question in risk management: **how much can you lose 
 and does the usual "returns are normally distributed" assumption get that number right?**
 
 This project analyses eleven years of daily NVDA returns (2014–2024), fits ARCH and GARCH
-volatility models, and uses them to estimate downside risk three different ways. The short
-answer: returns are strongly fat-tailed, volatility clusters and persists, and the normal
-assumption materially understates extreme losses.
+volatility models, and uses them to estimate downside risk three different ways. Result: NVDA returns have fat
+tails and volatility clusters, so a normal-distribution risk estimate understates the worst
+days (99% Expected Shortfall of −7.6% vs −11.8% under a t-distribution).
 
 > **Context.** Group project (Group 8) for *Big Data & Artificial Intelligence for Operations
 > Management*, IE Master in Business Analytics & Data Science. NVIDIA is the subject of the
