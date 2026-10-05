@@ -172,6 +172,7 @@ tight in quiet markets.
 
 ```
 ├── nvidia_volatility_risk.ipynb   # Full analysis, executed with outputs
+├── monte_carlo_var_extension.ipynb  # Individual extension: Monte Carlo 1-day and 10-day VaR
 ├── figures/                       # All charts exported from the notebook
 ├── docs/
 │   └── presentation.pdf           # Group presentation slides
@@ -210,6 +211,27 @@ shift the smallest decimals).
 
 ---
 
+## Extension: Monte Carlo VaR (individual work)
+
+*Added by Aylin Yaşgul after the group project, in `monte_carlo_var_extension.ipynb`.*
+
+Uses the same AR(1)-GARCH(1,1)-t model to simulate 50,000 possible 10-day paths from the last day of 2024,
+giving a fourth VaR method alongside historical, normal and Student-t.
+
+| Horizon | 99% VaR | 99% Expected Shortfall |
+|---|:---:|:---:|
+| 1-day | −5.92% | −8.37% |
+| 10-day | −16.55% | −22.00% |
+
+- **Conditional risk:** volatility at the end of 2024 (2.35% a day) was below the model's long-run level (3.77%),
+  so the forward-looking 1-day VaR is smaller than the full-sample estimates above.
+- **Multi-day horizon:** scaling the 1-day VaR by √10 gives −18.72%, overstating the simulated 10-day VaR by about 13%,
+  because fat-tailed daily shocks partly average out over several days.
+
+![Monte Carlo VaR](figures/13_monte_carlo_var.png)
+
+---
+
 ## Limitations
 
 - **In-sample only.** The model is fitted and evaluated on the same 2014–2024 data. The dynamic
@@ -219,7 +241,7 @@ shift the smallest decimals).
 - **Symmetric volatility response.** GARCH(1,1) treats good and bad shocks alike; equity
   volatility typically rises more after losses than after gains.
 - **Single asset.** No portfolio, correlation or diversification effects are considered.
-- **One-step forecast only.** No multi-day horizon, which is what most capital calculations use.
+- **One-step forecast only (main notebook).** The Monte Carlo extension adds a 10-day horizon, which is what most capital calculations use.
 - **Regime effects.** NVDA's 2014–2024 run includes an exceptional AI-driven
   re-rating; the period may not represent its future risk profile.
 
@@ -230,7 +252,7 @@ shift the smallest decimals).
 - Backtest the dynamic VaR with Kupiec and Christoffersen tests to check exception rates
 - Fit asymmetric models (GJR-GARCH, EGARCH) to capture the leverage effect
 - Use filtered historical simulation for conditional VaR and ES
-- Extend to multi-day horizons and to a multi-asset portfolio
+- Extend to a multi-asset portfolio (multi-day horizons are covered in the Monte Carlo extension)
 
 ---
 
